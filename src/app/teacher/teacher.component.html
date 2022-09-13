@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <button type="button" class="btn btn-success my-4" (click)="openModal(template)">Add Techaer</button>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Qualification</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let teacher of teachers; index as i" >
+            <th scope="row">{{teacher.id}}</th>
+            <td>{{ teacher.name}}</td>
+            <td>{{ teacher.qualification }}</td>
+            <td>
+                <button type="button" class="btn btn-primary mx-1" (click)="openModal(template,teacher)">Edit</button>
+                <button type="button" class="btn btn-danger mx-1" (click)="delete(teacher)">Delete</button>
+                <a routerLink="../teacherschedules/{{teacher.id}}" class="btn btn-success mx-1">View Schedule</a>
+            </td>
+          </tr>
+
+
+
+          
+ 
+
+          
+        </tbody>
+      </table>
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h3> </h3>
+            <form>
+                <div class="form-group">
+                  <label for="teachername">Teacher Name</label>
+                  <input type="text" class="form-control" placeholder="Teacher name" [formControl]="name">
+                </div>
+                <div class="form-group">
+                  <label for="qualification">Qualification</label>
+                  <input type="text" class="form-control"  placeholder="Qualification" [formControl]="qualification">
+                </div>
+                 
+                <button type="button" class="btn btn-primary my-3" (click)="modalRef?.hide();save()">{{btntitle}}</button>
+              </form>
+        </div>
+      </ng-template>
+</div>

@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <h2 class=" my-4" >Teacher Schedule</h2>
+    <table class="table table-bordered">
+        <thead>
+          <tr> 
+            <th scope="col">Class</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Timing</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let schedu of teachersch; index as i" >
+            <ng-container *ngIf="schedu.timingfrom == 'Break'; else simpleresult">
+               
+              <td colspan="6" class="text-center"><b>Break / Teacher Meeting</b></td>
+              </ng-container>
+              <ng-template #simpleresult> 
+            <td>{{ schedu.class}}</td>
+            <td>{{ schedu.subject }}</td>
+            <td>{{ schedu.timingfrom }} - {{  schedu.timingto }}</td>
+            <td>{{ schedu.duration }}</td>
+            <td>
+                <button type="button" class="btn btn-primary mx-1" (click)="openModal(template, schedu)">Edit</button>
+             </td>
+            </ng-template>
+          </tr>
+          <tr>
+          <td colspan="6" class="text-center"><b>OFF</b></td>
+        </tr>
+
+
+
+          
+ 
+
+          
+        </tbody>
+      </table>
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ModalTitle}}</h4>
+          <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h3> </h3>
+            <form>
+                <div class="form-group">
+                  <label for="teachername">Class</label>
+                  <input type="text" class="form-control" placeholder="Class" [formControl]="classs">
+                </div>
+                <div class="form-group">
+                  <label for="qualification">Subject</label>
+                  <input type="text" class="form-control"  placeholder="subject" [formControl]="subject">
+                </div>
+                
+             <button type="button" class="btn btn-primary my-3" (click)="modalRef?.hide();save()">{{btntitle}}</button>
+              </form>
+        </div>
+      </ng-template>
+</div>
